@@ -1,0 +1,8 @@
+# Ignore source TypeScript files - only deploy compiled JavaScript
+src/
+*.ts
+!src/**/*.js
+tsconfig.json
+.eslintrc.cjs
+.git
+.gitignore

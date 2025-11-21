@@ -1,0 +1,229 @@
+{
+  "metadata": {
+    "generated": "2025-11-21T06:45:00Z",
+    "phase": "PHASE 1: DIAGNOSE & PRIORITISE",
+    "team_lead": "ARCH",
+    "total_issues": 6
+  },
+  "p0_critical": [],
+  "p1_high": [
+    {
+      "id": "P1-001",
+      "title": "Missing Environment Variables Template",
+      "owner": "DEVOPS",
+      "priority": "P1",
+      "status": "open",
+      "files_involved": [
+        "web/.env.local.example"
+      ],
+      "reproduction_steps": [
+        "1. cd web",
+        "2. pnpm dev",
+        "3. Observe: Firebase init fails with missing config vars",
+        "4. Expected: Clear template showing required environment variables"
+      ],
+      "impact": "Cannot run dev server locally or configure Firebase client SDK",
+      "suggested_fix": "Create web/.env.local.example with all required Firebase config keys from firebase-admin-key.json and hosting setup",
+      "estimated_risk": "low",
+      "acceptance_criteria": [
+        "File web/.env.local.example exists with all NEXT_PUBLIC_FIREBASE_* vars",
+        "README.md updated with setup instructions referencing the template",
+        "Developers can copy template and fill values to run dev server"
+      ],
+      "related_docs": [
+        "web/lib/firebase.ts",
+        "firebase.json"
+      ]
+    },
+    {
+      "id": "P1-002",
+      "title": "Missing Logo Asset (SVG)",
+      "owner": "UI",
+      "assignees": ["UI", "FE"],
+      "priority": "P1",
+      "status": "open",
+      "files_involved": [
+        "web/public/assets/logo.svg",
+        "web/app/page.tsx",
+        "web/components/Nav.tsx",
+        "web/components/LandingNav.tsx"
+      ],
+      "reproduction_steps": [
+        "1. Inspect web/app/page.tsx line 19",
+        "2. Observe: Text-only 'RIVOCT' branding",
+        "3. Check web/public/assets/ directory",
+        "4. Expected: Optimized SVG logo file"
+      ],
+      "impact": "Text-only branding in navbar; visual mismatch with reference image",
+      "suggested_fix": "UI team extracts logo from reference image, provides optimized SVG with multiple size variants. FE updates navbar imports.",
+      "estimated_risk": "low",
+      "acceptance_criteria": [
+        "web/public/assets/logo.svg exists with optimized markup",
+        "Logo variants provided: logo-icon.svg (icon only), logo-full.svg (with text)",
+        "Navbar updated to use <Image> or <svg> component",
+        "Logo displays correctly on light/dark backgrounds",
+        "Visual match confirmed against /mnt/data/webapp.JPG"
+      ],
+      "related_docs": [
+        "web/app/page.tsx",
+        "web/components/Nav.tsx"
+      ]
+    },
+    {
+      "id": "P1-003",
+      "title": "No Automated Test Infrastructure",
+      "owner": "QA",
+      "priority": "P1",
+      "status": "open",
+      "files_involved": [
+        "package.json",
+        "functions/package.json",
+        "web/package.json",
+        "vitest.config.ts",
+        "functions/src/__tests__/",
+        "web/__tests__/"
+      ],
+      "reproduction_steps": [
+        "1. Run: pnpm test",
+        "2. Observe: No test script configured",
+        "3. Check for test files in __tests__/ or *.test.ts",
+        "4. Expected: Test runner (Vitest/Jest) configured with smoke tests"
+      ],
+      "impact": "No regression safety net; cannot verify fixes before merge",
+      "suggested_fix": "Add Vitest to workspace packages with smoke tests for: API endpoints, Firebase Auth, Firestore queries, UI component mounting",
+      "estimated_risk": "medium",
+      "acceptance_criteria": [
+        "Vitest configured in root package.json and workspace packages",
+        "Smoke tests cover: /api/health, /api/v1/voice-otp validation, homepage rendering",
+        "CI integration: tests run on PR",
+        "Coverage report generated (minimum 60% for critical paths)",
+        "Test documentation in ci/testing-guide.md"
+      ],
+      "test_scenarios": [
+        "API: POST /api/v1/voice-otp with valid payload returns 200",
+        "API: Invalid API key returns 401",
+        "API: Rate limit exceeded returns 429",
+        "UI: Homepage renders without console errors",
+        "UI: Dashboard requires authentication"
+      ],
+      "related_docs": [
+        "functions/src/api/voiceOtp.ts",
+        "web/app/page.tsx"
+      ]
+    }
+  ],
+  "p2_medium": [
+    {
+      "id": "P2-001",
+      "title": "Missing OpenAPI Documentation",
+      "owner": "BE",
+      "assignees": ["BE", "PM"],
+      "priority": "P2",
+      "status": "open",
+      "files_involved": [
+        "functions/src/api/",
+        "docs/openapi.yaml"
+      ],
+      "reproduction_steps": [
+        "1. Search for openapi.yaml or swagger.json",
+        "2. Observe: No API spec found",
+        "3. Check VOICE_OTP_API_REFERENCE.md (manual documentation)",
+        "4. Expected: Machine-readable OpenAPI 3.0 spec"
+      ],
+      "impact": "External integrations require manual code inspection; no Postman import",
+      "suggested_fix": "Generate OpenAPI spec from existing Zod schemas in functions/src/api/. Use @asteasolutions/zod-to-openapi or similar.",
+      "estimated_risk": "low",
+      "acceptance_criteria": [
+        "docs/openapi.yaml generated with all /api/v1/* endpoints",
+        "Spec includes request/response schemas from Zod validators",
+        "Authentication schemes documented (x-api-key, x-webhook-secret)",
+        "Postman collection generated from spec",
+        "Spec validates with Swagger Editor"
+      ],
+      "related_docs": [
+        "VOICE_OTP_API_REFERENCE.md",
+        "functions/src/shared/validators.ts"
+      ]
+    },
+    {
+      "id": "P2-002",
+      "title": "No Visual Regression Tests",
+      "owner": "QA",
+      "assignees": ["QA", "UI"],
+      "priority": "P2",
+      "status": "open",
+      "files_involved": [
+        "web/__tests__/visual/",
+        "playwright.config.ts",
+        ".github/workflows/visual-regression.yml"
+      ],
+      "reproduction_steps": [
+        "1. Check CI pipeline for screenshot comparison",
+        "2. Observe: No visual testing configured",
+        "3. Manual verification required for UI changes",
+        "4. Expected: Automated screenshot diff on PR"
+      ],
+      "impact": "Cannot detect unintended style changes; CSS regressions slip through",
+      "suggested_fix": "Add Playwright with screenshot testing. Baseline images from current production. Percy/Chromatic optional for hosted solution.",
+      "estimated_risk": "low",
+      "acceptance_criteria": [
+        "Playwright configured with @playwright/test",
+        "Screenshot tests for: homepage, dashboard, login, logs pages",
+        "Baseline images committed to repo",
+        "CI fails on pixel diff > 0.1%",
+        "Update workflow documented for intentional UI changes"
+      ],
+      "test_pages": [
+        "/",
+        "/login",
+        "/dashboard",
+        "/logs",
+        "/settings"
+      ],
+      "related_docs": [
+        "web/app/"
+      ]
+    },
+    {
+      "id": "P2-003",
+      "title": "Dashboard Performance: Excessive Firestore Reads",
+      "owner": "FE",
+      "assignees": ["FE", "DB"],
+      "priority": "P2",
+      "status": "open",
+      "files_involved": [
+        "web/lib/hooks.ts",
+        "web/app/dashboard/page.tsx",
+        "web/app/logs/page.tsx"
+      ],
+      "reproduction_steps": [
+        "1. Open Firebase Console > Firestore > Usage",
+        "2. Navigate to /dashboard and /logs pages",
+        "3. Observe: Real-time listeners cause continuous reads",
+        "4. Expected: Pagination + caching to reduce read volume"
+      ],
+      "impact": "High Firestore costs with scale; real-time updates may not be required for all data",
+      "suggested_fix": "Add pagination for logs table. Use SWR or React Query for caching static data (API keys, usage summary). Keep real-time only for critical live data.",
+      "estimated_risk": "low",
+      "acceptance_criteria": [
+        "Logs page implements pagination (20 items per page)",
+        "SWR caching added for /api/v1/usage/summary (60s stale time)",
+        "API keys fetched once on settings page load (not real-time)",
+        "Firestore read count reduced by >70% on typical dashboard session",
+        "Performance metrics documented in ci/performance-report.md"
+      ],
+      "related_docs": [
+        "web/lib/hooks.ts",
+        "MONITORING.md"
+      ]
+    }
+  ],
+  "summary": {
+    "p0_count": 0,
+    "p1_count": 3,
+    "p2_count": 3,
+    "total_estimated_hours": 24,
+    "blocking_issues": [],
+    "next_phase": "PHASE 2: FIX PLAN"
+  }
+}

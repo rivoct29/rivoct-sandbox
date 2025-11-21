@@ -1,0 +1,97 @@
+swagger: '2.0'
+info:
+  title: Voice OTP API Gateway
+  description: Public API gateway for Voice OTP service
+  version: 1.0.0
+host: voice-otp-gateway-8gl0ppvc.uc.gateway.dev
+schemes:
+  - https
+produces:
+  - application/json
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: x-api-key
+    in: header
+paths:
+  /health:
+    get:
+      summary: Health check
+      operationId: health
+      x-google-backend:
+        address: https://api-wju6e5vpmq-el.a.run.app/health
+      responses:
+        200:
+          description: Service is healthy
+  /v1/voice-otp:
+    post:
+      summary: Send voice OTP
+      operationId: sendVoiceOtp
+      security:
+        - api_key: []
+      x-google-backend:
+        address: https://api-wju6e5vpmq-el.a.run.app/v1/voice-otp
+      parameters:
+        - in: header
+          name: x-api-key
+          type: string
+          required: true
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              phone:
+                type: string
+              otpCode:
+                type: string
+              metadata:
+                type: object
+      responses:
+        201:
+          description: OTP sent successfully
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        429:
+          description: Rate limit exceeded
+  /v1/usage/summary:
+    get:
+      summary: Get usage summary
+      operationId: usageSummary
+      security:
+        - api_key: []
+      x-google-backend:
+        address: https://api-wju6e5vpmq-el.a.run.app/v1/usage/summary
+      parameters:
+        - in: header
+          name: x-api-key
+          type: string
+          required: true
+      responses:
+        200:
+          description: Usage summary
+  /v1/logs:
+    get:
+      summary: Query logs
+      operationId: queryLogs
+      security:
+        - api_key: []
+      x-google-backend:
+        address: https://api-wju6e5vpmq-el.a.run.app/v1/logs
+      parameters:
+        - in: header
+          name: x-api-key
+          type: string
+          required: true
+        - in: query
+          name: limit
+          type: integer
+        - in: query
+          name: status
+          type: string
+      responses:
+        200:
+          description: Logs retrieved

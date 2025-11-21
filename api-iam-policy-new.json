@@ -1,0 +1,15 @@
+{
+  "bindings": [
+    {
+      "members": [
+        "domain:rivoct.com",
+        "serviceAccount:api-gateway-invoker@rivoct-sandbox.iam.gserviceaccount.com",
+        "user:admin@rivoct.com",
+        "allUsers"
+      ],
+      "role": "roles/run.invoker"
+    }
+  ],
+  "etag": "BwZEDZMvyJE=",
+  "version": 1
+}

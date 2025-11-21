@@ -1,0 +1,81 @@
+{
+  "info": {
+    "name": "Rivoct Voice OTP Sandbox",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Collection covering sandbox API calls and webhook simulation."
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.rivoct.com" },
+    { "key": "apiKey", "value": "YOUR_API_KEY" },
+    { "key": "webhookUrl", "value": "https://mcm-webhook-rivoct.a.run.app" }
+  ],
+  "item": [
+    {
+      "name": "Voice OTP",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "x-api-key", "value": "{{apiKey}}" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/v1/voice-otp",
+          "host": ["{{baseUrl}}"],
+          "path": ["v1", "voice-otp"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"phone\": \"+919876543210\",\n  \"otpCode\": \"123456\",\n  \"metadata\": {\n    \"orderId\": \"demo-order\"\n  }\n}"
+        }
+      }
+    },
+    {
+      "name": "Fetch Logs",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "x-api-key", "value": "{{apiKey}}" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/v1/logs?limit=20",
+          "host": ["{{baseUrl}}"],
+          "path": ["v1", "logs"],
+          "query": [{ "key": "limit", "value": "20" }]
+        }
+      }
+    },
+    {
+      "name": "Usage Summary",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "x-api-key", "value": "{{apiKey}}" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/v1/usage/summary",
+          "host": ["{{baseUrl}}"],
+          "path": ["v1", "usage", "summary"]
+        }
+      }
+    },
+    {
+      "name": "Webhook Delivery",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "x-webhook-secret", "value": "replace-with-secret" }
+        ],
+        "url": {
+          "raw": "{{webhookUrl}}/webhooks/mcm/delivery-status",
+          "host": ["{{webhookUrl}}"],
+          "path": ["webhooks", "mcm", "delivery-status"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"requestId\": \"demo-request-id\",\n  \"customerId\": \"demo-customer\",\n  \"status\": \"answered\",\n  \"durationSeconds\": 42,\n  \"deliveredAt\": \"2025-01-01T10:00:00.000Z\"\n}"
+        }
+      }
+    }
+  ]
+}

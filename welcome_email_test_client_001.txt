@@ -1,0 +1,42 @@
+Subject: Welcome to Rivoct Voice OTP Service
+
+Hi Test Client,
+
+Welcome to Rivoct Voice OTP! Your account has been successfully created.
+
+API CREDENTIALS
+===============
+Customer ID: test_client_001
+API Key: SiofTPlWRZk4q5J2gQsHnIu0aLbtpxcyvhMNe8U6BKD1OFmY
+
+⚠️ Keep your API key secure - treat it like a password!
+
+API ENDPOINT
+===========
+Base URL: https://api-663012819768.asia-south1.run.app
+
+QUICK START
+===========
+Send a voice OTP:
+
+PowerShell:
+`powershell
+$headers = @{"x-api-key" = "SiofTPlWRZk4q5J2gQsHnIu0aLbtpxcyvhMNe8U6BKD1OFmY"}
+$body = @{phone = "+919876543210"; otpCode = "123456"} | ConvertTo-Json
+Invoke-WebRequest -Uri "https://api-663012819768.asia-south1.run.app/v1/voice-otp" -Method POST -Headers $headers -Body $body
+`
+
+RATE LIMITS
+===========
+- Per Minute: 5 calls
+- Per Day: 100 calls  
+- Per Month: 1000 calls
+
+PRICING
+=======
+₹0.32 per successful call
+
+Need help? Reply to this email or visit our documentation.
+
+Best regards,
+Rivoct Team

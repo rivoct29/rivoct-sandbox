@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <title>Rivoct Icon</title>
+  <defs>
+    <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00ff87;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00d4ff;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- R letter -->
+  <path d="M14 10 L14 38 L26 38 C31 38 36 33 36 28 C36 23 31 18 26 18 L14 18" 
+        stroke="url(#iconGradient)" 
+        stroke-width="3" 
+        fill="none" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"/>
+  <!-- R diagonal leg -->
+  <path d="M24 18 L34 38" 
+        stroke="url(#iconGradient)" 
+        stroke-width="3" 
+        stroke-linecap="round"/>
+  <!-- Signal indicator -->
+  <circle cx="40" cy="12" r="2" fill="#00ff87"/>
+</svg>

@@ -1,0 +1,27 @@
+{
+  "name": "rivoct-sandbox",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "functions",
+    "webhook",
+    "web",
+    "shared"
+  ],
+  "scripts": {
+    "build": "pnpm -r run build",
+    "lint": "pnpm -r run lint",
+    "test": "pnpm --filter @rivoct/functions test && pnpm --filter @rivoct/web test",
+    "test:ui": "vitest --ui",
+    "test:coverage": "pnpm --filter @rivoct/functions test --coverage && pnpm --filter @rivoct/web test --coverage",
+    "test:ci": "pnpm --filter @rivoct/functions test --run && pnpm --filter @rivoct/web test --run",
+    "deploy:functions": "pnpm --filter @rivoct/functions run build && firebase deploy --only functions",
+    "deploy:web": "pnpm --filter @rivoct/web run build && firebase deploy --only hosting"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^4.0.12",
+    "@vitest/ui": "^4.0.12",
+    "typescript": "5.6.3",
+    "vitest": "^4.0.12"
+  }
+}

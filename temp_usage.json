@@ -1,0 +1,11 @@
+{
+  "dayLimit": 100,
+  "minuteLimit": 5,
+  "monthCount": 0,
+  "dayCount": 0,
+  "totalCostInr": 0,
+  "minuteCount": 0,
+  "customerId": "test_client_001",
+  "monthLimit": 1000,
+  "updatedAt": "2025-11-21T02:14:57Z"
+}

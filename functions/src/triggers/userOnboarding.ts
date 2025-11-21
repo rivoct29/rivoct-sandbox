@@ -1,0 +1,38 @@
+import * as functions from "firebase-functions/v1";
+import { db } from "../utils/firestore";
+
+export const onUserCreated = functions.auth.user().onCreate(async (user) => {
+  const customerId = user.uid;
+  const email = user.email || "unknown";
+  const name = user.displayName || email.split("@")[0];
+  const now = new Date().toISOString();
+
+  // 1. Create Customer Profile
+  await db.collection("customers").doc(customerId).set({
+    id: customerId,
+    name: name,
+    email: email,
+    status: "active",
+    billingPlan: "sandbox",
+    apiKeyIds: [],
+    createdAt: now
+  });
+
+  // 2. Initialize Usage Counters (Zero State)
+  const currentMonth = now.slice(0, 7); // YYYY-MM
+  const currentDay = now.slice(0, 10);  // YYYY-MM-DD
+  const currentMinute = now.slice(0, 16); // YYYY-MM-DDTHH:mm
+
+  await db.collection("usage_counters").doc(customerId).set({
+    customerId: customerId,
+    minuteCount: 0,
+    minuteWindow: currentMinute,
+    dayCount: 0,
+    dayWindow: currentDay,
+    monthCount: 0,
+    monthWindow: currentMonth,
+    totalCostInr: 0
+  });
+
+  console.log(`[Onboarding] Successfully provisioned customer: ${customerId}`);
+});

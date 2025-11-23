@@ -50,3 +50,6 @@ welcome_email_*.txt
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+web/.env.local
+secrets/*
+functions/.tmp/

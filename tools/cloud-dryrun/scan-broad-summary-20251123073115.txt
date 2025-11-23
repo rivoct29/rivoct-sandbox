@@ -1,0 +1,2 @@
+Scan summary: 2025-11-23T02:01:15.7871796Z
+Thresholds: age >= 90 days; size >= 50 MB

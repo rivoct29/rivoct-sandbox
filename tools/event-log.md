@@ -29,4 +29,5 @@ This file records high-level events performed by automation and humans during th
 ```
 
 2025-11-23T02:30:00Z | system | delete-run | attempted targeted deletions for prefixes: archived-versions, archived-credentials, web/.next, web/out, node_modules, .next_cache, backup, tmp, archive, and files matching `*.pack` across discovered buckets; no matching objects found; no deletions performed
+2025-11-23T02:40:00Z | system | scan_broad | scanned all discovered buckets for age>=90d and size>=50MB; no matches found; summaries written to `tools/cloud-dryrun/scan-broad-summary-20251123073115.txt` and `tools/cloud-dryrun/scan-broad-summary-20251123073123.txt`
 

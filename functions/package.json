@@ -1,0 +1,9 @@
+{
+  "name": "@rivoct/functions",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "express": "^4.20.0",
+    "body-parser": "^1.20.3"
+  }
+}

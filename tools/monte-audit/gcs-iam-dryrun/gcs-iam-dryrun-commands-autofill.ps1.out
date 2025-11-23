@@ -1,0 +1,35 @@
+# Bucket: gcf-sources-663012819768-us-central1
+# Backup current policy
+gcloud storage buckets get-iam-policy "gs://gcf-sources-663012819768-us-central1" --format=json > "D:\Rivoct\rivoct-sandbox\tools\monte-audit\gcs-iam-dryrun\gcf-sources-663012819768-us-central1-policy-backup.json"
+# Suggested service accounts for this bucket: service-663012819768@gcf-admin-robot.iam.gserviceaccount.com
+gcloud storage buckets add-iam-policy-binding "gs://gcf-sources-663012819768-us-central1" --member=serviceAccount:service-663012819768@gcf-admin-robot.iam.gserviceaccount.com --role=roles/storage.objectAdmin
+gcloud storage buckets add-iam-policy-binding "gs://gcf-sources-663012819768-us-central1" --member=serviceAccount:service-663012819768@gcf-admin-robot.iam.gserviceaccount.com --role=roles/storage.objectViewer
+# Remove legacy project-level binding example (change exact member/role using backup)
+gcloud storage buckets remove-iam-policy-binding "gs://gcf-sources-663012819768-us-central1" --member=projectEditor:rivoct-sandbox --role=roles/storage.legacyBucketOwner
+
+# Bucket: gcf-v2-sources-663012819768-asia-south1
+# Backup current policy
+gcloud storage buckets get-iam-policy "gs://gcf-v2-sources-663012819768-asia-south1" --format=json > "D:\Rivoct\rivoct-sandbox\tools\monte-audit\gcs-iam-dryrun\gcf-v2-sources-663012819768-asia-south1-policy-backup.json"
+# Suggested service accounts for this bucket: service-663012819768@gcf-admin-robot.iam.gserviceaccount.com
+gcloud storage buckets add-iam-policy-binding "gs://gcf-v2-sources-663012819768-asia-south1" --member=serviceAccount:service-663012819768@gcf-admin-robot.iam.gserviceaccount.com --role=roles/storage.objectAdmin
+gcloud storage buckets add-iam-policy-binding "gs://gcf-v2-sources-663012819768-asia-south1" --member=serviceAccount:service-663012819768@gcf-admin-robot.iam.gserviceaccount.com --role=roles/storage.objectViewer
+# Remove legacy project-level binding example (change exact member/role using backup)
+gcloud storage buckets remove-iam-policy-binding "gs://gcf-v2-sources-663012819768-asia-south1" --member=projectEditor:rivoct-sandbox --role=roles/storage.legacyBucketOwner
+
+# Bucket: gcf-v2-uploads-663012819768.asia-south1.cloudfunctions.appspot.com
+# Backup current policy
+gcloud storage buckets get-iam-policy "gs://gcf-v2-uploads-663012819768.asia-south1.cloudfunctions.appspot.com" --format=json > "D:\Rivoct\rivoct-sandbox\tools\monte-audit\gcs-iam-dryrun\gcf-v2-uploads-663012819768.asia-south1.cloudfunctions.appspot.com-policy-backup.json"
+# Suggested service accounts for this bucket: service-663012819768@gcf-admin-robot.iam.gserviceaccount.com, rivoct-sandbox@appspot.gserviceaccount.com, 663012819768-compute@developer.gserviceaccount.com
+gcloud storage buckets add-iam-policy-binding "gs://gcf-v2-uploads-663012819768.asia-south1.cloudfunctions.appspot.com" --member=serviceAccount:service-663012819768@gcf-admin-robot.iam.gserviceaccount.com --role=roles/storage.objectAdmin
+gcloud storage buckets add-iam-policy-binding "gs://gcf-v2-uploads-663012819768.asia-south1.cloudfunctions.appspot.com" --member=serviceAccount:rivoct-sandbox@appspot.gserviceaccount.com --role=roles/storage.objectViewer
+# Remove legacy project-level binding example (change exact member/role using backup)
+gcloud storage buckets remove-iam-policy-binding "gs://gcf-v2-uploads-663012819768.asia-south1.cloudfunctions.appspot.com" --member=projectEditor:rivoct-sandbox --role=roles/storage.legacyBucketOwner
+
+# Bucket: rivoct-sandbox_cloudbuild
+# Backup current policy
+gcloud storage buckets get-iam-policy "gs://rivoct-sandbox_cloudbuild" --format=json > "D:\Rivoct\rivoct-sandbox\tools\monte-audit\gcs-iam-dryrun\rivoct-sandbox_cloudbuild-policy-backup.json"
+# Suggested service accounts for this bucket: 663012819768@cloudbuild.gserviceaccount.com, service-663012819768@gcp-sa-cloudbuild.iam.gserviceaccount.com
+gcloud storage buckets add-iam-policy-binding "gs://rivoct-sandbox_cloudbuild" --member=serviceAccount:663012819768@cloudbuild.gserviceaccount.com --role=roles/storage.objectAdmin
+gcloud storage buckets add-iam-policy-binding "gs://rivoct-sandbox_cloudbuild" --member=serviceAccount:service-663012819768@gcp-sa-cloudbuild.iam.gserviceaccount.com --role=roles/storage.objectViewer
+# Remove legacy project-level binding example (change exact member/role using backup)
+gcloud storage buckets remove-iam-policy-binding "gs://rivoct-sandbox_cloudbuild" --member=projectEditor:rivoct-sandbox --role=roles/storage.legacyBucketOwner

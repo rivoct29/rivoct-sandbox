@@ -1,3 +1,5 @@
+
+```markdown
 # Event Log
 
 This file records high-level events performed by automation and humans during the repository audit/cleanup.
@@ -21,3 +23,7 @@ This file records high-level events performed by automation and humans during th
 2025-11-23T01:41:05.272Z | system | delete | secret:SECRET_API_SALT deleted
 2025-11-23T01:41:12.339Z | system | delete | secret:SECRET_WEBHOOK deleted
 2025-11-23T01:41:25.641Z | system | verify | cloud storage dry-run: no matching objects found for archive/build patterns across buckets; secrets deleted
+
+2025-11-23T02:10:00Z | system | finalize_audit | final cloud-vs-local audit report and API audit summary added to `tools/monte-audit/` and event log finalized
+
+```

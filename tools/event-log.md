@@ -1,3 +1,5 @@
+
+```markdown
 # Event Log
 
 This file records high-level events performed by automation and humans during the repository audit/cleanup.
@@ -21,3 +23,11 @@ This file records high-level events performed by automation and humans during th
 2025-11-23T01:41:05.272Z | system | delete | secret:SECRET_API_SALT deleted
 2025-11-23T01:41:12.339Z | system | delete | secret:SECRET_WEBHOOK deleted
 2025-11-23T01:41:25.641Z | system | verify | cloud storage dry-run: no matching objects found for archive/build patterns across buckets; secrets deleted
+
+2025-11-23T02:10:00Z | system | finalize_audit | final cloud-vs-local audit report and API audit summary added to `tools/monte-audit/` and event log finalized
+
+```
+
+2025-11-23T02:30:00Z | system | delete-run | attempted targeted deletions for prefixes: archived-versions, archived-credentials, web/.next, web/out, node_modules, .next_cache, backup, tmp, archive, and files matching `*.pack` across discovered buckets; no matching objects found; no deletions performed
+2025-11-23T02:40:00Z | system | scan_broad | scanned all discovered buckets for age>=90d and size>=50MB; no matches found; summaries written to `tools/cloud-dryrun/scan-broad-summary-20251123073115.txt` and `tools/cloud-dryrun/scan-broad-summary-20251123073123.txt`
+

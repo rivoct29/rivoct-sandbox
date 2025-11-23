@@ -10,3 +10,13 @@ This file records high-level events performed by automation and humans during th
 2025-11-23T01:39:15.749Z | system | dry-run | cloud dry-run listings saved under tools/cloud-dryrun for project rivoct-sandbox
 2025-11-23T01:39:31.911Z | system | dry-run | gcloud dry-run listings saved under tools/cloud-dryrun (gcloud-based)
 2025-11-23T01:39:35.821Z | system | dry-run | listed secrets for project rivoct-sandbox and saved to tools/cloud-dryrun/secrets-list.txt
+2025-11-23T01:40:05.685Z | system | delete | secret:CARRIER_ACCOUNT_SID deleted
+2025-11-23T01:40:13.219Z | system | delete | secret:CARRIER_API_KEY deleted
+2025-11-23T01:40:20.925Z | system | delete | secret:CARRIER_API_TOKEN deleted
+2025-11-23T01:40:28.303Z | system | delete | secret:CARRIER_CLIENT_ID deleted
+2025-11-23T01:40:35.376Z | system | delete | secret:CARRIER_FLOW deleted
+2025-11-23T01:40:43.193Z | system | delete | secret:CARRIER_FROM_NUMBER deleted
+2025-11-23T01:40:50.626Z | system | delete | secret:FIREBASE_ADMIN_SDK deleted
+2025-11-23T01:40:57.867Z | system | delete | secret:INTERNAL_BACKEND_TOKEN deleted
+2025-11-23T01:41:05.272Z | system | delete | secret:SECRET_API_SALT deleted
+2025-11-23T01:41:12.339Z | system | delete | secret:SECRET_WEBHOOK deleted

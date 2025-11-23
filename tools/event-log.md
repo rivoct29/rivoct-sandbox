@@ -20,3 +20,4 @@ This file records high-level events performed by automation and humans during th
 2025-11-23T01:40:57.867Z | system | delete | secret:INTERNAL_BACKEND_TOKEN deleted
 2025-11-23T01:41:05.272Z | system | delete | secret:SECRET_API_SALT deleted
 2025-11-23T01:41:12.339Z | system | delete | secret:SECRET_WEBHOOK deleted
+2025-11-23T01:41:25.641Z | system | verify | cloud storage dry-run: no matching objects found for archive/build patterns across buckets; secrets deleted

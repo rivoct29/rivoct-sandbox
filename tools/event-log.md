@@ -9,3 +9,4 @@ This file records high-level events performed by automation and humans during th
 2025-11-23T01:28:30.871Z | system | purge | git-filter-repo removed archived-versions, archived-credentials, web/out, web/.next, node_modules, and .pack files
 2025-11-23T01:39:15.749Z | system | dry-run | cloud dry-run listings saved under tools/cloud-dryrun for project rivoct-sandbox
 2025-11-23T01:39:31.911Z | system | dry-run | gcloud dry-run listings saved under tools/cloud-dryrun (gcloud-based)
+2025-11-23T01:39:35.821Z | system | dry-run | listed secrets for project rivoct-sandbox and saved to tools/cloud-dryrun/secrets-list.txt

@@ -32,6 +32,18 @@ app.post("/mcm/delivery-status", async (req: Request, res: Response) => {
     }
     
     if (!headerSecret || headerSecret !== secret) {
+      // Log minimal identifying info for failed auth attempts (avoid logging secrets)
+      try {
+        const maybe = {
+          requestId: req.body?.requestId ?? null,
+          customerId: req.body?.customerId ?? null,
+          ip: req.ip ?? null,
+          path: req.path
+        };
+        console.warn('Webhook auth failed', maybe);
+      } catch (e) {
+        console.warn('Webhook auth failed - could not extract body', (e as any)?.message ?? String(e));
+      }
       res.status(401).json({ error: "Invalid webhook secret" });
       return;
     }
@@ -46,6 +58,20 @@ app.post("/mcm/delivery-status", async (req: Request, res: Response) => {
       .get();
 
     if (logSnap.empty) {
+       // Record a tombstone for manual reconciliation and log identifying fields
+       const tombstone = {
+         requestId: payload.requestId,
+         customerId: payload.customerId,
+         status: payload.status,
+         receivedAt: Timestamp.now(),
+         note: 'VOICE_LOG_NOT_FOUND'
+       };
+       try {
+         await db.collection('webhook_tombstones').add(tombstone);
+       } catch (e) {
+         console.error('Failed to write webhook tombstone', (e as any)?.message ?? String(e));
+       }
+       console.warn('VOICE_LOG_NOT_FOUND', { requestId: payload.requestId, customerId: payload.customerId });
        res.status(404).json({ error: "Webhook processing failed", code: "VOICE_LOG_NOT_FOUND" });
        return;
     }

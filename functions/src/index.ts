@@ -10,6 +10,7 @@ import { logsHandler } from "./api/logs";
 import { usageSummaryHandler } from "./api/usage";
 import { webhookApp } from "./api/webhooks";
 import { consoleApp } from "./api/console";
+import { carrierActivateHandler } from "./api/carrier";
 import { onUserCreated } from "./triggers/userOnboarding";
 
 // Enforce region globally (auto-heal rule)
@@ -28,6 +29,7 @@ app.get("/v1/logs", apiKeyAuth, logsHandler);
 app.get("/v1/usage/summary", apiKeyAuth, usageSummaryHandler);
 app.get("/v1/webhooks", apiKeyAuth, webhookApp);
 app.get("/v1/console", apiKeyAuth, consoleApp);
+app.post("/v1/carrier/activate", apiKeyAuth, rateLimit, carrierActivateHandler);
 
 app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
   const message = err instanceof Error ? err.message : "Unknown error";

@@ -45,16 +45,24 @@ export const updateVoiceLogStatus = async (
 export interface FetchLogsOptions {
   limit?: number;
   status?: VoiceOtpStatus;
+  startAfter?: number | string; // milliseconds since epoch or ISO string parseable to number
 }
 
 export const fetchLogs = async (
   customerId: string,
-  { limit = 50, status }: FetchLogsOptions
+  { limit = 20, status, startAfter }: FetchLogsOptions
 ): Promise<VoiceLogEntry[]> => {
   let ref: firestore.Query<VoiceLogEntry> = collection.where("customerId", "==", customerId);
   if (status) {
     ref = ref.where("status", "==", status);
   }
-  const snap = await ref.orderBy("createdAt", "desc").limit(Math.min(limit, 200)).get();
+  ref = ref.orderBy("createdAt", "desc");
+  if (startAfter) {
+    const ms = Number(startAfter);
+    if (!Number.isNaN(ms)) {
+      ref = ref.startAfter(firestore.Timestamp.fromMillis(ms));
+    }
+  }
+  const snap = await ref.limit(Math.min(limit, 200)).get();
   return snap.docs.map((doc: firestore.QueryDocumentSnapshot<VoiceLogEntry>) => ({ id: doc.id, ...doc.data() }));
 };

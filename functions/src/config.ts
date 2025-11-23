@@ -16,7 +16,8 @@ async function accessSecret(secretName: string): Promise<string> {
     const [version] = await client.accessSecretVersion({
       name: `projects/${PROJECT_ID}/secrets/${secretName}/versions/latest`
     });
-    return version.payload?.data?.toString() ?? "";
+    // Trim whitespace/newlines from secret payloads uploaded from various tools
+    return (version.payload?.data?.toString() ?? "").trim();
   } catch (err) {
     console.error("accessSecret failed", secretName, err);
     return "";
@@ -27,6 +28,10 @@ async function accessSecret(secretName: string): Promise<string> {
 let _apiSalt = "";
 let _webhookSecret = "";
 let _internalToken = "";
+let _carrierApiKey = "";
+let _carrierClientId = "";
+let _carrierFromNumber = "";
+let _carrierFlow = "";
 
 export const secrets = {
   getApiSalt: async () => {
@@ -40,6 +45,25 @@ export const secrets = {
   getInternalToken: async () => {
     if (!_internalToken) _internalToken = await accessSecret("INTERNAL_BACKEND_TOKEN");
     return _internalToken;
+  }
+  ,
+  getCarrierApiKey: async () => {
+    if (!_carrierApiKey) _carrierApiKey = await accessSecret("CARRIER_API_KEY");
+    return _carrierApiKey;
+  },
+  getCarrierClientId: async () => {
+    if (!_carrierClientId) _carrierClientId = await accessSecret("CARRIER_CLIENT_ID");
+    return _carrierClientId;
+  }
+  ,
+  getCarrierFromNumber: async () => {
+    if (!_carrierFromNumber) _carrierFromNumber = await accessSecret("CARRIER_FROM_NUMBER");
+    return _carrierFromNumber;
+  }
+  ,
+  getCarrierFlow: async () => {
+    if (!_carrierFlow) _carrierFlow = await accessSecret("CARRIER_FLOW");
+    return _carrierFlow;
   }
 };
 

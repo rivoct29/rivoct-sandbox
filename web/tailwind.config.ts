@@ -22,6 +22,22 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-inter)"],
         mono: ["var(--font-jetbrains-mono)"]
+      },
+      screens: {
+        'xs': '320px',
+        'sm': '375px',
+        'md': '768px',
+        'lg': '1024px',
+        'xl': '1280px',
+        '2xl': '1536px',
+      },
+      boxShadow: {
+        'signal': '0 4px 24px rgba(0, 255, 148, 0.08)',
+        'signal-lg': '0 4px 24px rgba(0, 255, 148, 0.12)',
+        'signal-xl': '0 8px 32px rgba(0, 255, 148, 0.20)',
+      },
+      transitionDuration: {
+        '200': '200ms',
       }
     }
   },

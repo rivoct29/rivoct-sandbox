@@ -7,6 +7,27 @@ export const onUserCreated = functions.auth.user().onCreate(async (user) => {
   const name = user.displayName || email.split("@")[0];
   const now = new Date().toISOString();
 
+  // Check if user document already exists (created by frontend)
+  const userDoc = await db.collection("users").doc(user.uid).get();
+  
+  if (!userDoc.exists) {
+    // Create user document if frontend didn't create it
+    await db.collection("users").doc(user.uid).set({
+      uid: user.uid,
+      email: email,
+      createdAt: now,
+      lastLoginAt: now,
+      loginCount: 1,
+      customerId: customerId,
+      status: "active",
+      emailVerified: user.emailVerified || false,
+      metadata: {
+        signupMethod: user.providerData[0]?.providerId || "email",
+        creationTime: user.metadata.creationTime,
+      }
+    });
+  }
+
   // 1. Create Customer Profile
   await db.collection("customers").doc(customerId).set({
     id: customerId,
@@ -34,5 +55,5 @@ export const onUserCreated = functions.auth.user().onCreate(async (user) => {
     totalCostInr: 0
   });
 
-  console.log(`[Onboarding] Successfully provisioned customer: ${customerId}`);
+  console.log(`[Onboarding] Successfully provisioned customer: ${customerId} (${email})`);
 });

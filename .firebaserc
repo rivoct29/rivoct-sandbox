@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "rivoct-sandbox"
+    "default": "rivoct-sandbox",
+    "production": "rivoct-prod"
   }
 }

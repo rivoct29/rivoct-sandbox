@@ -1,0 +1,129 @@
+{
+  "analysis\\report-000.md": {
+    "GENERIC_ERROR": 1
+  },
+  "analysis\\workspace-cleanup-phase0.md": {
+    "GENERIC_ERROR": 1
+  },
+  "ARCHITECTURE.md": {
+    "429": 1
+  },
+  "ci\\verify-report-20251121.md": {
+    "GENERIC_ERROR": 1
+  },
+  "docs\\api\\API_INTEGRATION_GUIDE.md": {
+    "401": 1,
+    "429": 1,
+    "GENERIC_ERROR": 1
+  },
+  "docs\\api\\VOICE_OTP_API_REFERENCE.md": {
+    "401": 1,
+    "429": 1,
+    "GENERIC_ERROR": 1
+  },
+  "docs\\deployment\\DEPLOYMENT.md": {
+    "429": 1
+  },
+  "docs\\deployment\\DEPLOYMENT_STATUS.md": {
+    "401": 1,
+    "429": 1,
+    "GENERIC_ERROR": 1
+  },
+  "docs\\deployment\\DEPLOY_RUNBOOK.md": {
+    "401": 1
+  },
+  "docs\\deployment\\IAM_ACCESS.md": {
+    "429": 1
+  },
+  "docs\\onboarding\\CLIENT_ONBOARDING.md": {
+    "429": 1,
+    "GENERIC_ERROR": 1
+  },
+  "docs\\onboarding\\INTEGRATION_WORKFLOW.md": {
+    "401": 1,
+    "429": 1,
+    "GENERIC_ERROR": 1
+  },
+  "docs\\onboarding\\MEZZINGO_SETUP_INSTRUCTIONS.md": {
+    "GENERIC_ERROR": 1
+  },
+  "docs\\operations\\MONITORING.md": {
+    "429": 1,
+    "GENERIC_ERROR": 1
+  },
+  "docs\\operations\\SECRETS_MANAGEMENT.md": {
+    "401": 1
+  },
+  "docs\\reports\\ADMIN_DASHBOARD_FINAL_FIX.md": {
+    "GENERIC_ERROR": 1
+  },
+  "docs\\reports\\FRONTEND_AUDIT_FIXES.md": {
+    "429": 1,
+    "GENERIC_ERROR": 1
+  },
+  "docs\\reports\\PHASE2_COMPLETION_REPORT.md": {
+    "429": 1
+  },
+  "docs\\reports\\PHASE_FIX_COMPLETION_REPORT.md": {
+    "GENERIC_ERROR": 1
+  },
+  "fixplan\\plan-000.md": {
+    "GENERIC_ERROR": 1
+  },
+  "functions\\firebase-debug.log": {
+    "GENERIC_ERROR": 1
+  },
+  "functions\\lighthouse-accessibility.json": {
+    "GENERIC_ERROR": 1
+  },
+  "issues\\prioritized.json": {
+    "401": 1,
+    "429": 1,
+    "GENERIC_ERROR": 1
+  },
+  "lighthouse-accessibility.json": {
+    "401": 1,
+    "429": 1,
+    "GENERIC_ERROR": 1
+  },
+  "response.json": {
+    "GENERIC_ERROR": 1
+  },
+  "tools\\archived-credentials\\welcome_email_mezzingo.txt": {
+    "429": 1
+  },
+  "tools\\archived-credentials\\welcome_email_midhun_test_001.txt": {
+    "429": 1
+  },
+  "tools\\archived-credentials\\welcome_email_test_client_001.txt": {
+    "429": 1
+  },
+  "UI_UX_IMPLEMENTATION_REPORT.md": {
+    "GENERIC_ERROR": 1
+  },
+  "USER_LOGGING_IMPLEMENTATION.md": {
+    "429": 1,
+    "GENERIC_ERROR": 1
+  },
+  "web\\.next\\next-server.js.nft.json": {
+    "GENERIC_ERROR": 1
+  },
+  "web\\out\\changelog\\index.txt": {
+    "429": 1
+  },
+  "web\\out\\contact\\index.txt": {
+    "GENERIC_ERROR": 1
+  },
+  "web\\out\\docs\\index.txt": {
+    "GENERIC_ERROR": 1
+  },
+  "web\\out\\index.txt": {
+    "GENERIC_ERROR": 1
+  },
+  "web\\out\\privacy\\index.txt": {
+    "GENERIC_ERROR": 1
+  },
+  "web\\out\\terms\\index.txt": {
+    "429": 1
+  }
+}

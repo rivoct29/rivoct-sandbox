@@ -15,7 +15,8 @@ export default function LogsPage() {
   const { user } = useAuthUser();
   const profile = useCustomerProfile(user?.uid ?? undefined);
   const [filter, setFilter] = useState<StatusFilter>("all");
-  const logs = useVoiceLogs(profile?.customerId, 100);
+  const [size, setSize] = useState<number>(20);
+  const logs = useVoiceLogs(profile?.customerId, size);
 
   const filteredLogs = useMemo(() => {
     if (filter === "all") return logs.data;
@@ -54,6 +55,16 @@ export default function LogsPage() {
             </div>
           </div>
           <LogsTable logs={filteredLogs} />
+          <div className="mt-4 flex justify-center">
+            {logs.data.length >= size && (
+              <button
+                onClick={() => setSize((s) => s + 20)}
+                className="border px-3 py-2 font-mono text-xs uppercase"
+              >
+                Load more
+              </button>
+            )}
+          </div>
         </main>
       </div>
     </RequireAuth>

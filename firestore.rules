@@ -19,7 +19,9 @@ service cloud.firestore {
 
     match /users/{userId} {
       allow read: if requireAuth() && request.auth.uid == userId;
-      allow write: if isAdmin();
+      allow create: if requireAuth() && request.auth.uid == userId;
+      allow update: if requireAuth() && request.auth.uid == userId;
+      allow delete: if isAdmin();
     }
 
     match /voice_logs/{logId} {

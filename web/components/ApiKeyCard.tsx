@@ -17,7 +17,7 @@ export const ApiKeyCard = ({ apiKey }: Props) => {
   };
 
   return (
-    <GlassCard hoverEffect>
+    <GlassCard>
       <div className="flex items-center justify-between">
         <p className="font-mono text-xs uppercase text-mono">API_ACCESS_KEY</p>
         <div className="flex items-center gap-2">

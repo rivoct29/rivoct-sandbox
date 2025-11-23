@@ -1,3 +1,49 @@
+name: CI Deploy (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment (sandbox|production)'
+        required: true
+        default: 'sandbox'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Restore secrets file
+        if: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_BASE64 != '' }}
+        run: |
+          echo "$GAC_BASE64" | base64 --decode > ${{ github.workspace }}/gcloud-sa.json
+        env:
+          GAC_BASE64: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_BASE64 }}
+
+      - name: Configure credentials
+        run: |
+          if [ -f "${{ github.workspace }}/gcloud-sa.json" ]; then
+            echo "Using provided service account key";
+            export GOOGLE_APPLICATION_CREDENTIALS="${{ github.workspace }}/gcloud-sa.json";
+          else
+            echo "No service account key found; aborting"; exit 1;
+          fi
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm -r build
+
+      - name: Deploy
+        run: pnpm run deploy:${{ github.event.inputs.environment }}
 name: Deploy Rivoct Sandbox
 
 on:

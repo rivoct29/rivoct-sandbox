@@ -2,6 +2,240 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-void text-primary;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-void text-primary antialiased;
+  }
+
+  /* Mobile / Safari improvements */
+  html, body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Respect safe-area insets on modern iOS Safari */
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  /* Focus styles for accessibility */
+  /* Focus styles for accessibility
+     - WCAG: Ensure focus indicators are visible and at least 3px wide for keyboard users.
+     - We use a CSS variable `--focus-outline` so components can reference the same accessible ring.
+  */
+  :root {
+    /* Design tokens */
+    --button-radius: 6px; /* Standardized button border radius (6px) */
+    --primary-accent: #00FF88; /* Primary accent used for icons and interactive accents */
+    /* Signal color as RGB so we can create rgba variants dynamically */
+    --signal-rgb: 0,255,136;
+    /* CTA / visual tuning variables (can be varied during visual sweep) */
+    --cta-saturation: 1; /* 0-1 multiplier for CTA background alpha when using rgba */
+    --cta-text-opacity: 1; /* 0-1 opacity for CTA label color when using rgba() */
+    --footer-bg-opacity: 0.05; /* footer background opacity */
+    --footer-text-opacity: 0.70; /* footer text opacity */
+    --focus-outline-color: rgba(0,255,136,0.95); /* Focus ring color (high contrast) */
+    --focus-outline: 3px solid var(--focus-outline-color);
+    --cta-height: 48px; /* Standard CTA height */
+  }
+
+  *:focus-visible {
+    outline: var(--focus-outline);
+    outline-offset: 4px;
+  }
+
+  /* Custom animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes staggerFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .animate-staggerFadeIn {
+    animation: staggerFadeIn 0.6s ease-out forwards;
+  }
+
+  /* Prefer reduced motion users should not see animations */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fadeIn,
+    .animate-staggerFadeIn {
+      animation: none !important;
+    }
+  }
+}
+
+/* Touch device adjustments: disable hover transforms/transitions on coarse pointers */
+@media (pointer: coarse), (hover: none) {
+  *:hover {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Ensure backdrop-filter works on iOS Safari with vendor prefix */
+.backdrop-blur-sm {
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+
+@layer utilities {
+  /* Letter spacing for hero text */
+  .tracking-hero {
+    letter-spacing: -0.04em;
+  }
+
+  /* Touch targets for mobile */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Button utilities using CSS variables for consistent sizing and radius */
+  .btn-radius {
+    border-radius: var(--button-radius) !important;
+  }
+
+  .btn-standard {
+    height: var(--cta-height);
+    padding: 12px 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--button-radius);
+  }
+
+  /* Outline/secondary button with visible hover & focus states (used by Explore Features)
+     - Hover background is intentionally different from primary to create visible contrast
+  */
+  .explore-features-btn {
+    background-color: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+  }
+  .explore-features-btn:hover {
+    background-color: rgba(0,255,136,0.06); /* distinct from primary */
+    border-color: rgba(255,255,255,0.3);
+  }
+  .explore-features-btn:focus-visible {
+    box-shadow: 0 0 0 4px rgba(0,255,136,0.12);
+  }
+
+  /* Terminal example helpers */
+  .terminal-example {
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 4px 24px rgba(0,255,148,0.08);
+  }
+
+  /* Stats grid responsive rule: default 4 columns, collapse to 2 columns at <=1024px
+     This ensures correct reflow between 768-1024px as requested.
+  */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5rem;
+  }
+  @media (max-width: 1024px) {
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Stat label typography enforced to meet design: 12px & semi-bold */
+  .stat-label {
+    font-size: 12px; /* Lock to 12px */
+    font-weight: 600; /* 600 for emphasis */
+    letter-spacing: 0.04em;
+  }
+
+  /* Icon color consistency: use primary accent for SVG fills and icon text color */
+  .icon-fill {
+    color: var(--primary-accent) !important;
+    fill: var(--primary-accent) !important;
+  }
+
+  /* Footer link color tuned for WCAG AA contrast against #050505 (void)
+     Chosen: #D1D1D1 provides >= 4.5:1 contrast with the dark background.
+  */
+  .footer-link {
+    color: #D1D1D1;
+    transition: color 160ms ease;
+  }
+  .footer-link:hover {
+    color: var(--primary-accent);
+  }
+}
+
+/* Primary CTA utility that uses CSS variables for fast visual tuning.
+   - Use class `btn-primary` on CTAs that need to be visually prominent.
+   - The Playwright visual-sweep will vary `--cta-saturation` and `--cta-text-opacity`.
+*/
+@layer utilities {
+  .btn-primary {
+    height: var(--cta-height);
+    padding: 0 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--button-radius);
+    border: none;
+    background-color: rgba(var(--signal-rgb), var(--cta-saturation));
+    color: rgba(5,5,5, var(--cta-text-opacity)); /* dark text over signal background */
+    font-weight: 700;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Segoe UI Mono', monospace;
+    font-size: 0.875rem;
+    line-height: 1;
+  }
+  .btn-primary:hover {
+    filter: brightness(1.03);
+  }
+  .btn-primary:disabled {
+    opacity: 0.5;
+  }
+  /* Footer helpers driven by variables */
+  .footer-bg-dynamic {
+    background-color: rgba(5,5,5,var(--footer-bg-opacity));
+  }
+  .footer-text-dynamic {
+    color: rgba(255,255,255,var(--footer-text-opacity));
+  }
+}
+
+/* Terminal responsive tweaks */
+@media (max-width: 768px) {
+  .terminal-example { font-size: 12px; }
+  .terminal-example code, .terminal-example pre { word-break: break-all; }
 }

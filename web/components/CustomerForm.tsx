@@ -79,7 +79,7 @@ export const CustomerForm = () => {
         </div>
         <button
           type="submit"
-          className="w-full border border-signal bg-signal/10 py-3 font-mono text-sm font-bold text-signal hover:bg-signal hover:text-black transition-all"
+          className="w-full btn-primary transition-all"
         >
           PROVISION_CUSTOMER
         </button>

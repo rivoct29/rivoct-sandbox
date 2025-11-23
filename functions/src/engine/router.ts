@@ -1,6 +1,8 @@
 import { v4 as uuid } from "uuid";
 import { config } from "../config";
 import { MockProvider } from "../providers/mock";
+import ExotelProvider from "../providers/exotel";
+import { secrets } from "../config";
 import { recordVoiceLog } from "../services/logService";
 import { UsageService } from "../services/usageService";
 import { CustomerService } from "../services/customerService";
@@ -15,8 +17,17 @@ interface SendOtpInput {
 
 export class OtpRouter {
   static async routeAndSend(input: SendOtpInput): Promise<VoiceOtpResponseDTO> {
-    // 1. Select Provider (Simple for now)
-    const provider = new MockProvider();
+    // 1. Select Provider (prefer Exotel when credentials exist)
+    let provider: any;
+    try {
+      const carrierKey = await secrets.getCarrierApiKey();
+      if (carrierKey) {
+        provider = new ExotelProvider();
+      }
+    } catch (err) {
+      // fallthrough to mock
+    }
+    if (!provider) provider = new MockProvider();
 
     // 2. Prepare Request
     await CustomerService.ensureActive(input.customerId);

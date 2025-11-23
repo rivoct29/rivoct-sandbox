@@ -37,6 +37,14 @@ ui-debug.log
 *.pem
 firebase-admin-key.json
 
+# Archived credentials
+tools/archived-credentials/*
+**/api_key_*.json
+**/customer_*.json
+**/usage_*.json
+**/temp_*.json
+welcome_email_*.txt
+
 # Logs
 *.log
 npm-debug.log*

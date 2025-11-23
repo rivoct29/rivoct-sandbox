@@ -2,10 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
   output: "export",
-  experimental: {
-    serverActions: {
-      allowedOrigins: ["https://rivoct.com", "http://localhost:3000"]
-    }
+  distDir: ".next",
+  trailingSlash: true,
+  images: {
+    unoptimized: true
   }
 };
 

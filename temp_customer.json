@@ -1,8 +1,0 @@
-{
-  "createdAt": "2025-11-21T02:14:56Z",
-  "status": "active",
-  "name": "Test Client",
-  "id": "test_client_001",
-  "apiKeyIds": [],
-  "billingPlan": "sandbox"
-}

@@ -6,6 +6,7 @@
   },
   "hosting": {
     "public": "web/out",
+    "site": "rivoct-sandbox",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -26,14 +27,7 @@
           "region": "asia-south1"
         }
       },
-      {
-        "source": "/webhooks/**",
-        "function": "webhooks"
-      },
-      {
-        "source": "/api/**",
-        "function": "api"
-      },
+
       {
         "source": "**",
         "destination": "/index.html"

@@ -17,7 +17,7 @@ describe('Homepage', () => {
 
   it('should display system status indicator', () => {
     render(<HomePage />);
-    const status = screen.getByText(/SYSTEM OPERATIONAL/i);
+    const status = screen.getByText(/All Systems Operational/i);
     expect(status).toBeInTheDocument();
   });
 
@@ -37,7 +37,7 @@ describe('Homepage', () => {
 
   it('should contain CTA button for console access', () => {
     render(<HomePage />);
-    const ctaButton = screen.getByRole('link', { name: /INITIALIZE_CONSOLE/i });
+    const ctaButton = screen.getByRole('link', { name: /Get API Key/i });
     expect(ctaButton).toBeInTheDocument();
     expect(ctaButton).toHaveAttribute('href', '/login');
   });

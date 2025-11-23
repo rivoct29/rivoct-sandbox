@@ -1,0 +1,21 @@
+{"users": [
+{
+  "localId": "EBUQgXR4Q0RfgynGOrzVN71mWNP2",
+  "email": "admin@rivoct.com",
+  "emailVerified": false,
+  "passwordHash": "aD00SrYBuYXPnBmgtWOLdbpxU38jSMz77EyQsCq3YlllnDyI980456aPl6HRTan4Wm519vFb18nf753MV1A8iA==",
+  "salt": "jzHmRZFJ08vhUg==",
+  "lastSignedInAt": "1763736104889",
+  "createdAt": "1763736104889",
+  "providerUserInfo": []
+},
+{
+  "localId": "HgvGx2c780WLY2X09GoiOkYWvM82",
+  "email": "rahilshahsadha60@gmail.com",
+  "emailVerified": false,
+  "passwordHash": "4xTis4P7IWuofNuPzFlMO9Zlpu9rCFf5RZ0Yz4lqoGCJgNNWpk857GF/23ijZUlNfZIug7Nfxcb3lTSeIWRvgA==",
+  "salt": "kTzXb/HGvpM/Yg==",
+  "lastSignedInAt": "1763735143514",
+  "createdAt": "1763735143514",
+  "providerUserInfo": []
+}]}

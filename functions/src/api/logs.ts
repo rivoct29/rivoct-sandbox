@@ -36,10 +36,12 @@ export const logsHandler = async (req: RequestWithContext, res: Response): Promi
       return;
     }
     const query = querySchema.parse(req.query);
-    const items = await fetchLogs(req.authContext.customerId, {
-      limit: query.limit,
-      status: query.status
-    });
+      const startAfter = req.query?.startAfter ? String(req.query.startAfter) : undefined;
+      const items = await fetchLogs(req.authContext.customerId, {
+        limit: query.limit,
+        status: query.status,
+        startAfter
+      });
     res.json({ items: items.map(serializeLog) });
   } catch (error) {
     if (error instanceof z.ZodError) {
